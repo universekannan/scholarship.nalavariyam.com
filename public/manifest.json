@@ -1,0 +1,17 @@
+{
+    "name": "Nalavariyam Scholarship",
+    "short_name": "Nalavariyam Scholarship",
+    "start_url": "studentlogin",
+    "background_color": "#6777ef",
+    "description": "Nalavariyam Scholarship",
+    "display": "fullscreen",
+    "theme_color": "#6777ef",
+    "icons": [
+        {
+            "src": "Logo1.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
