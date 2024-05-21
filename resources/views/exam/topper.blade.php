@@ -22,7 +22,10 @@
                                 <tr>
                                     <th>Student Name</th>
                                     <th>Aadhaar Number</th>
+                                    <th>Total</th>
+                                    <th>Answered</th>
                                     <th>Correct</th>
+                                    <th>Wrong</th>
                                     <th>Percentage</th>
                                     <th>Time Taken</th>
                                 </tr>
@@ -32,7 +35,10 @@
                     <tr> 
                     <td>{{ $e->student_name }}</td>
                     <td>{{ $e->adhaar_number }}</td>
+                    <td>{{ $e->total_ques }}</td>
+                    <td>{{ $e->answered_ques }}</td>
                     <td>{{ $e->corr }}</td>
+                    <td>{{ $e->wrong_answer }}</td>
                     <td>{{ round($e->corr/100,2)*100 }} %</td>
                     <td>{{ $e->mins_seconds }}</td>
                     </tr>

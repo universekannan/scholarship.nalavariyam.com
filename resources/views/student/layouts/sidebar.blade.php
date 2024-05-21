@@ -62,7 +62,7 @@
                     <a href="{{ route('examresult') }}" class="nav-link">
                         <i class=""></i>
                         <i class="nav-icon fa fa-award"></i>
-                        <p>Online Result</p>
+                        <p>Exam Result</p>
                     </a>
                 </li>
                 @endif

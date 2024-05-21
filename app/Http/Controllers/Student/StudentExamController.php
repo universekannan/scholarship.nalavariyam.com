@@ -404,9 +404,30 @@ class StudentExamController extends Controller
                 $top[$key]["end_time"] = $result[0]->start_time;
             }
 
+            $total_ques=0;
+            $answered_ques=0;
+            $wrong_answer=0;
+            $sql = "select count(*) as total_ques from exam_answer where student_id = $student_id";
+            $result = DB::select(DB::raw($sql));
+            if(count($result)>0){
+                $total_ques=$result[0]->total_ques;
+            }
+            $sql = "select count(*) as answered_ques from exam_answer where student_id = $student_id and answered_option is not null";
+            $result = DB::select(DB::raw($sql));
+            if(count($result)>0){
+                $answered_ques=$result[0]->answered_ques;
+            }
+            $sql = "select count(*) as wrong_answer from exam_answer where student_id = $student_id and answered_option is not null and correct=0";
+            $result = DB::select(DB::raw($sql));
+            if(count($result)>0){
+                $wrong_answer=$result[0]->wrong_answer;
+            }
             $sql = "select * from exam_answer where student_id = $student_id and exam_session_id=$exam_session_id and answered_option is not null order by id desc limit 1";
             $result = DB::select(DB::raw($sql));
             if(count($result) > 0){
+                $top[$key]["total_ques"] = $total_ques;
+                $top[$key]["answered_ques"] = $answered_ques;
+                $top[$key]["wrong_answer"] = $wrong_answer;
                 $top[$key]["end_time"] = $result[0]->answer_time;
                 $start_time = $top[$key]["start_time"];
                 $end_time = $top[$key]["end_time"];
