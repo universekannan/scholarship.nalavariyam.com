@@ -25,6 +25,29 @@
                             <div class="col-md-6">Wrong Answers</div>
                             <div class="col-md-6">{{ $wrong }}</div>
                         </div>
+                        <hr>
+                        @foreach ($wrong_answers as $k => $w)
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>{{ $k + 1 }}. {{ $w->question }}</p>
+                            </div>
+                            <div class="col-md-12">
+                                <p @if($w->correct_option=="option_a") class="text-success" @endif @if($w->answered_option=="option_a") class="text-danger" @endif >{{ $w->option_a }}</p>
+                            </div>
+                            <div class="col-md-12">
+                                <p @if($w->correct_option=="option_b") class="text-success" @endif @if($w->answered_option=="option_b") class="text-danger" @endif >{{ $w->option_b }}</p>
+                            </div>
+                            <div class="col-md-12">
+                                <p @if($w->correct_option=="option_c") class="text-success" @endif @if($w->answered_option=="option_c") class="text-danger" @endif >{{ $w->option_c }}</p>
+                            </div>
+                            <div class="col-md-12">
+                                <p @if($w->correct_option=="option_d") class="text-success" @endif @if($w->answered_option=="option_d") class="text-danger" @endif >{{ $w->option_d }}</p>
+                            </div>
+                            <div class="col-md-12">
+                                <hr/>
+                            </div>
+                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

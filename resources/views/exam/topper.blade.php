@@ -27,6 +27,8 @@
                                     <th>Correct</th>
                                     <th>Wrong</th>
                                     <th>Percentage</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
                                     <th>Time Taken</th>
                                 </tr>
                             </thead>
@@ -39,7 +41,9 @@
                     <td>{{ $e->answered_ques }}</td>
                     <td>{{ $e->corr }}</td>
                     <td>{{ $e->wrong_answer }}</td>
-                    <td>{{ round($e->corr/100,2)*100 }} %</td>
+                    <td>{{ round($e->corr/$e->total_ques,2)*100 }} %</td>
+                    <td>{{ $e->start_time }}</td>
+                    <td>{{ $e->end_time }}</td>
                     <td>{{ $e->mins_seconds }}</td>
                     </tr>
                  @endforeach

@@ -518,7 +518,10 @@ class StudentExamController extends Controller
         if(count($result)>0){
             $wrong = $result[0]->wrong;
         }
-        return view( 'student/examresult',compact('answered','correct','wrong'));
+
+        $sql = "select * from exam_answer where student_id='$student_id' and correct=0 and answered_option is NOT NULL";
+        $wrong_answers = DB::select(DB::raw($sql));
+        return view( 'student/examresult',compact('answered','correct','wrong','wrong_answers'));
     }
 
     public function allpracticeresult(){
