@@ -435,7 +435,12 @@ class StudentExamController extends Controller
                 $diff = $start_datetime->diff(new DateTime($end_time)); 
                 $total_seconds = ($diff->h)*60*60 + ($diff->i)*60 + $diff->s; 
                 $top[$key]["total_seconds"] = $total_seconds;
-                $mins_seconds = ($diff->h)*60*60 + ($diff->i) ." mins ". $diff->s. " secs"; 
+                $mins_seconds = ($diff->h)*60*60 + ($diff->i);
+                if($mins_seconds >= 60){
+                    $mins_seconds = "60 mins"; 
+                }else{
+                    $mins_seconds = $mins_seconds ." mins ". $diff->s. " secs"; 
+                }
                 $top[$key]["mins_seconds"] = $mins_seconds;
             }
 
