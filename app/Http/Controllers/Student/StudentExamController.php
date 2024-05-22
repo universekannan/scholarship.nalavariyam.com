@@ -266,10 +266,16 @@ class StudentExamController extends Controller
             $correct = 0;
             $wrong = 0;
             $title = "";
+            $total=0;
             $sql = "select title from exam_schedule where id=$exam_schedule_id";
             $result = DB::select(DB::raw($sql));
             if(count($result)>0){
                 $title = $result[0]->title;
+            }
+            $sql = "select count(*) as total from exam_answer where exam_session_id='$exam_id'";
+            $result = DB::select(DB::raw($sql));
+            if(count($result)>0){
+                $total = $result[0]->total;
             }
             $sql = "select count(*) as answered from exam_answer where exam_session_id='$exam_id' and answered_option is NOT NULL";
             $result = DB::select(DB::raw($sql));
@@ -290,6 +296,7 @@ class StudentExamController extends Controller
             $completed[$key]["correct"] = $correct;
             $completed[$key]["wrong"] = $wrong;
             $completed[$key]["title"] = $title;
+            $completed[$key]["total"] = $total;
         }
         $completed = json_decode(json_encode($completed));
         $today = date("Y-m-d");
@@ -508,6 +515,12 @@ class StudentExamController extends Controller
         $answered = 0;
         $correct = 0;
         $wrong = 0;
+        $total=0;
+        $sql = "select count(*) as total from exam_answer where student_id='$student_id'";
+        $result = DB::select(DB::raw($sql));
+        if(count($result)>0){
+            $total = $result[0]->total;
+        }
         $sql = "select count(*) as answered from exam_answer where student_id='$student_id' and answered_option is NOT NULL";
         $result = DB::select(DB::raw($sql));
         if(count($result)>0){
@@ -526,7 +539,7 @@ class StudentExamController extends Controller
 
         $sql = "select * from exam_answer where student_id='$student_id' and correct=0 and answered_option is NOT NULL";
         $wrong_answers = DB::select(DB::raw($sql));
-        return view( 'student/examresult',compact('answered','correct','wrong','wrong_answers'));
+        return view( 'student/examresult',compact('total','answered','correct','wrong','wrong_answers'));
     }
 
     public function allpracticeresult(){

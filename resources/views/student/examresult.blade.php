@@ -11,7 +11,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">Total Questions</div>
-                            <div class="col-md-6">100</div>
+                            <div class="col-md-6">{{ $total }}</div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">Answered Questions</div>
