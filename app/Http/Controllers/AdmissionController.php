@@ -238,4 +238,12 @@ class AdmissionController extends Controller
         DB::table('department')->where('id', $id)->delete();
     	return redirect()->back()->with('success', 'Delete Department Successfully ... !');
     }
+	   
+	public function edustudents()
+    {
+    	$edustudents = DB::table('edustudents')->orderBy('id', 'Asc')->get();
+		
+    	return view('/admission/edustudents', compact('edustudents'));
+    }
+	
 }
