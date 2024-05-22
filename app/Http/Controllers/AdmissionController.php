@@ -250,6 +250,7 @@ class AdmissionController extends Controller
     {
         $colleges = DB::table('colleges')->orderBy('id', 'Asc')->get();
          $managedistrict  = DB::table( 'district' )->orderBy( 'id', 'Asc' )->get();
+         $edutype  = DB::table( 'edutype' )->orderBy( 'id', 'Asc' )->get();
         return view('/admission/assignstudent',compact('colleges','managedistrict'));
     }
 	
