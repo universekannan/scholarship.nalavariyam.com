@@ -241,9 +241,16 @@ class AdmissionController extends Controller
 	   
 	public function edustudents()
     {
-    	$edustudents = DB::table('edustudents')->orderBy('id', 'Asc')->get();
+    	$edustudents = DB::table('students')->whereIn('id', array(12, 13, 14, 15, 16, 18))->orderBy('id', 'Asc')->get();
 		
     	return view('/admission/edustudents', compact('edustudents'));
+    }
+
+        public function assigncollege($studentid)
+    {
+        $colleges = DB::table('colleges')->orderBy('id', 'Asc')->get();
+         $managedistrict  = DB::table( 'district' )->orderBy( 'id', 'Asc' )->get();
+        return view('/admission/assignstudent',compact('colleges','managedistrict'));
     }
 	
 }

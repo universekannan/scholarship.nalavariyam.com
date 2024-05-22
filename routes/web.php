@@ -67,7 +67,7 @@ Route::post('/addedutype', [App\Http\Controllers\AdmissionController::class, 'ad
 Route::post('/updateedutype', [App\Http\Controllers\AdmissionController::class, 'updateedutype'])->name('updateedutype');
 Route::get('/deleteedutype/{id}', [App\Http\Controllers\AdmissionController::class, 'deleteedutype'])->name('deleteedutype');
 Route::get('/admission/edustudents', [App\Http\Controllers\AdmissionController::class, 'edustudents'])->name('edustudents');
-
+Route::get('/admission/assigncollege/{studentid}', [App\Http\Controllers\AdmissionController::class, 'assigncollege'])->name('assigncollege');
 
 Route::get('/admission/institution/{id}', [App\Http\Controllers\AdmissionController::class, 'institution'])->name('institution');
 Route::post('/addinstitution', [App\Http\Controllers\AdmissionController::class, 'addinstitution'])->name('addinstitution');
