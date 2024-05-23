@@ -251,7 +251,34 @@ class AdmissionController extends Controller
         $colleges = DB::table('colleges')->orderBy('id', 'Asc')->get();
          $managedistrict  = DB::table( 'district' )->orderBy( 'id', 'Asc' )->get();
          $edutype  = DB::table( 'edutype' )->orderBy( 'id', 'Asc' )->get();
-        return view('/admission/assignstudent',compact('colleges','managedistrict'));
+        return view('/admission/assignstudent',compact('colleges','managedistrict','edutype','studentid'));
+    }
+
+    public function saveassigncollege(Request $request)
+    {
+        $colleges = $request->input('college_id');
+        $student_id = $request->studentid;
+        $dist_id = $request->dist_id;
+        $edutype_id = $request->edutype_id;
+        
+            foreach($colleges as $college){
+                
+                DB::table('assigned_college')->insert([
+                    'student_id' => $student_id,
+                    'dist_id'    => $dist_id,
+                    'edutype_id' => $edutype_id,
+                    'college_id' => $college
+                ]);
+            }
+        
+        return redirect()->back()->with('success', 'Success');
+    }
+
+    public function getcollege($distid,$edutypeid)
+    {
+        $colleges = DB::table('colleges')->where('district_id',$distid)->where('edutype_id',$edutypeid)->orderBy('id', 'Asc')->get();
+
+        return response()->json( $colleges );
     }
 	
 }

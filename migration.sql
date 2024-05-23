@@ -68,3 +68,13 @@ ALTER TABLE `department` ADD `edutype_id` INT(10) NULL DEFAULT NULL AFTER `id`;
 
 alter table exam_answer modify answer_time varchar(20) DEFAULT NULL; 
 alter table practice_exam_answer modify answer_time varchar(20) DEFAULT NULL; 
+
+
+CREATE TABLE `assigned_college` (
+  `id`  int NOT NULL AUTO_INCREMENT,
+  `student_id` int DEFAULT 0,
+  `dist_id` int DEFAULT 0,
+  `edutype_id` int DEFAULT 0,
+  `college_id` int DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;

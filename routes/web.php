@@ -69,6 +69,10 @@ Route::get('/deleteedutype/{id}', [App\Http\Controllers\AdmissionController::cla
 Route::get('/admission/edustudents', [App\Http\Controllers\AdmissionController::class, 'edustudents'])->name('edustudents');
 Route::get('/admission/assigncollege/{studentid}', [App\Http\Controllers\AdmissionController::class, 'assigncollege'])->name('assigncollege');
 
+Route::get('/getcolleges/{distid}/{edutypeid}', [App\Http\Controllers\AdmissionController::class, 'getcollege'])->name('getcollege');
+
+Route::post('/admission/saveassigncollege', [App\Http\Controllers\AdmissionController::class, 'saveassigncollege'])->name('saveassigncollege');
+
 Route::get('/admission/institution/{id}', [App\Http\Controllers\AdmissionController::class, 'institution'])->name('institution');
 Route::post('/addinstitution', [App\Http\Controllers\AdmissionController::class, 'addinstitution'])->name('addinstitution');
 Route::post('/updateinstitution', [App\Http\Controllers\AdmissionController::class, 'updateinstitution'])->name('updateinstitution');
