@@ -169,6 +169,7 @@ Route::post('/checklogin', [App\Http\Controllers\Student\StudentLoginController:
 ROUTE::get('/studentlogout', [App\Http\Controllers\Student\StudentLoginController::class, 'studentlogout'])->name('studentlogout');
 Route::POST('/checkaadhar', [App\Http\Controllers\Student\StudentLoginController::class, 'checkaadhar'])->name('checkaadhar');
 ROUTE::get('/exam', [App\Http\Controllers\Student\StudentExamController::class, 'exam'])->name('exam');
+Route::get('examcompleted',[App\Http\Controllers\Student\StudentExamController::class, 'examcompleted'])->name('examcompleted');
 
 Route::get('/service/{id}', [App\Http\Controllers\Student\StudentExamController::class, 'service'])->name('service');
 Route::POST('/saveservice', [App\Http\Controllers\Student\StudentExamController::class, 'saveservice'])->name('saveservice');
