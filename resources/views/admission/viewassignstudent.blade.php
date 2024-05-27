@@ -4,7 +4,7 @@
    <div class="container-fluid">
       <div class="row mb-2">
          <div class="col-sm-6">
-            <h1>Edu Students List</h1>
+            <h1>Assigned College List</h1>
          </div>
          <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -40,22 +40,23 @@
                            <tr>
                             <th> S No</th>
                             <th> Students Name</th>
-                            <th> Status</th>
-                            <th> Action</th>
-
+                            <th> District</th>
+                            <th> Edu Type</th>
+                            <th> Department</th>
+                            <th> View College</th>
                          </tr>
                       </thead>
                       <tbody>
-                        @foreach($edustudents as $edustudentslist)
+                        @foreach($edustudents as $key => $edustudentslist)
                         <tr>
-                           <td>{{ $edustudentslist->id }}</td>
+                           <td>{{ $key + 1 }}</td>
                            <td>{{ $edustudentslist->student_name }}</td>
-                           <td>{{ $edustudentslist->status }}</td>
+                           <td>{{ $edustudentslist->district_name }}</td>
+                           <td>{{ $edustudentslist->edutype_name }}</td>
+                           <td>{{ $edustudentslist->department_name }}</td>
                            <td>
-                           <a href="{{ url('/admission/assigncollege',$edustudentslist->id ) }}" class="btn btn-info btn-sm"> Admission</a>
-                           @if($edustudentslist->checkflg == 1)
-                             <a href="{{ url('/admission/viewassigncollege',$edustudentslist->id ) }}" class="btn btn-primary btn-sm">View Admission</a>
-                             @endif
+                            @php $college = json_encode($edustudentslist->colleges)  @endphp
+                           <a onclick = "viewcollege('{{ $college }}','{{ $key }}')" class="btn btn-info btn-sm"> View College</a>
                         </td>
                      </tr>
                      @endforeach
@@ -72,25 +73,43 @@
    <div class="modal-dialog modal-md">
       <div class="modal-content">
          <div class="modal-header">
-            <h4 class="modal-title">Add Edu Type Details</h4>
+            <h4 class="modal-title">College</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form action="{{url('/addedustudents')}}" method="post">
-            {{ csrf_field() }}
             <div class="modal-body">
-               <div class="form-group">
-                  <label for="edustudents_name">Edu instucen Name</label>
-                  <input type="text" class="form-control"  name="edustudents_name" id="edustudents_name" placeholder="Enter Edu instucen Name">
-               </div>             
+                 <table id="example2" class="table table-bordered table-striped">
+                        <thead>
+                           <tr>
+                            <th> S NO</th>
+                            <th> College Name</th>
+                         </tr>
+                      </thead>
+                      <tbody id="tabbody">
+                       
+                  </tbody>
+               </table>        
             </div>
             <div class="modal-footer justify-content-between">
                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-               <button id="save" type="submit" class="btn btn-primary">Submit</button>
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-         </form>
       </div>
    </div>
 </div>
 @endsection
+@push('page_scripts')
+<script>
+       function viewcollege(college,key){
+        $("#tabbody").html('');
+        var obj = JSON.parse(college);
+        $("#edustudents").modal("show");
+         $.each(obj, function(key, value) {
+                          var key = key + 1;
+                        $("#tabbody").append('<tr><td> '+ key +'</td><td> '+ value.college_name +'</td></tr>');
+                    });  
+       }
+
+</script>
+@endpush
