@@ -89,6 +89,22 @@
 @endsection
 @push('page_scripts')
 <script>
+
+    $('#edutype_id').on('change', function() {
+            var edutype_id = this.value;
+            $("#department_id").html('');
+            var url = "{{ url('/getdepartment') }}/" + edutype_id;
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function(result) {
+                    $.each(result, function(key, value) {
+                        $("#department_id").append('<option value="' + value.id + '">' + value.department_name + '</option>');
+                    });
+                }
+            });
+        });
+
        
         $('#department_id').on('change', function() {
             var department_id = this.value;

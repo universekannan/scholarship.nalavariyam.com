@@ -84,7 +84,7 @@
 			 <form action="{{url('/assigndepartment')}}" method="post">
                {{ csrf_field() }}
               <input type="hidden" value="{{ $id }}" name="ins_id">          
-				 <table id="example6" class="table table-bordered table-striped">
+				 <table id="example7" class="table table-bordered table-striped">
                      <thead>
                         <tr>
 								<th> S No	</th>
