@@ -5,9 +5,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 use Hash;
+use Auth;
 use DateTime;
 class StudentExamController extends Controller
 {
+
+    public function examcompleted()
+    {
+        $user_id=Auth::user()->id;
+        $user_type_id=Auth::user()->user_type_id;
+        $sql="select cell_number,a.student_name,a.username,a.cpassword,b.section_name,c.medium_name from students a,section b,medium c where a.section_id=b.id and a.medium_id=c.id ";
+        if($user_type_id != 1){
+            $sql .= " and a.user_id=$user_id";
+        }
+        $sql .=" and a.id not in (select student_id from exam_session)";
+        $notcompleted = DB::select($sql);
+        $sql="select cell_number,a.student_name,a.username,a.cpassword,b.section_name,c.medium_name from students a,section b,medium c where a.section_id=b.id and a.medium_id=c.id ";
+        if($user_type_id != 1){
+            $sql .= " and a.user_id=$user_id";
+        }
+        $sql .= " and a.id in (select student_id from exam_session)";
+        $completed = DB::select($sql);
+        return view( 'users/examcompleted',compact('notcompleted','completed'));
+    }
 
     public function practice(){
         return view( 'student/practice');
