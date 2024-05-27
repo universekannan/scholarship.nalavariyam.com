@@ -78,3 +78,5 @@ CREATE TABLE `assigned_college` (
   `college_id` int DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
+
+ALTER TABLE `assigned_college` ADD `department_id` INT(10) DEFAULT 0 AFTER `edutype_id`;

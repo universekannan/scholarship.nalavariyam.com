@@ -45,14 +45,25 @@
                                 </div>
 
                              <div class="form-group">
+                                <label>Department Name</label>
+                                <select required class="form-control select2" name="department_id" id="department_id"
+                                    style="width: 100%;">
+                                    <option value="">Select Department Name</option>
+                                     @foreach ($department as $dep)
+                                        <option value="{{ $dep->id }}">{{ $dep->department_name }}
+                                        </option>
+                                    @endforeach
+                                   
+                                </select>
+                                    </div>
+
+                                     <div class="form-group">
                                 <label>College Name</label>
                                 <select required class="form-control select2" multiple="multiple"
                            data-placeholder="Select a College"  name="college_id[]" id="college_id"
                                     style="width: 100%;">
-                                    <option value="">Select Bank Name</option>
-                                    @foreach ($colleges as $college)
-                                        <option value="{{ $college->id }}">{{ $college->college_name }}</option>
-                                    @endforeach
+                                    <option value="">Select Department</option>
+                                   
                                 </select>
                                     </div>
                         
@@ -79,20 +90,20 @@
 @push('page_scripts')
 <script>
        
-
-        $('#edutype_id').on('change', function() {
-
-            var edutype_id = this.value;
+        $('#department_id').on('change', function() {
+            var department_id = this.value;
             var district_id = $('#dist_id').val();
+            var edutype_id = $('#edutype_id').val();
             $("#college_id").html('');
-            var url = "{{ url('/getcolleges') }}/" + district_id +"/" + edutype_id;
+            var url = "{{ url('/getcolleges') }}/" + district_id +"/" + edutype_id +"/" + department_id;
             $.ajax({
                 url: url,
                 type: "GET",
                 success: function(result) {
                     $.each(result, function(key, value) {
-                        $("#college_id").append('<option value="' + value
-                            .id + '">' + value.college_name + '</option>');
+                          $.each(value.colleges, function(key, value) {
+                        $("#college_id").append('<option value="' + value.id + '">' + value.college_name + '</option>');
+                    });
                     });
                 }
             });

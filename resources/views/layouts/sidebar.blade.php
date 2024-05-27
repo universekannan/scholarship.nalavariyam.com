@@ -162,7 +162,7 @@
                </a>
             </li>
             @endif
-            <li class="nav-item has-treeview {{ request()->segment(1) == 'admission' || request()->segment(2) == 'edu_type' || request()->segment(2) == 'edustudents' || request()->segment(2) == 'colleges' || request()->is('addstudent') || request()->is('studentapproval') ? 'menu-open' : '' }}">
+             <li class="nav-item has-treeview {{ request()->segment(1) == 'admission' || request()->segment(2) == 'edu_type' || request()->segment(2) == 'edustudents' || request()->segment(2) == 'colleges' || request()->is('addstudent') || request()->is('studentapproval') ? 'menu-open' : '' }}">
                <a href="#" class="nav-link">
                   <i class="nav-icon fa fa-graduation-cap"></i>
                   <p>

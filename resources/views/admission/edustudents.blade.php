@@ -52,7 +52,10 @@
                            <td>{{ $edustudentslist->student_name }}</td>
                            <td>{{ $edustudentslist->status }}</td>
                            <td>
-                           <a href="{{ url('/admission/assigncollege',$edustudentslist->id ) }}" class="btn btn-info"><i class="fa fa-eye"title="view"></i> Admission</a>
+                           <a href="{{ url('/admission/assigncollege',$edustudentslist->id ) }}" class="btn btn-info btn-sm"> Admission</a>
+                           @if($edustudentslist->checkflg == 1)
+                             <a href="{{ url('/admission/viewassigncollege',$edustudentslist->id ) }}" class="btn btn-primary btn-sm">View Admission</a>
+                             @endif
                         </td>
                      </tr>
                      @endforeach
