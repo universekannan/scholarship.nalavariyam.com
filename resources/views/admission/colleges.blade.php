@@ -121,7 +121,7 @@
                               </div>
 											 <div class="form-group">
 												<label for="college_name">College Name</label>
-												<input type="text"  value="{{ $institutionlist->college_name }}" class="form-control"  name="college_name" id="editcollege_name" placeholder="">
+												<input type="text"  value="" class="form-control"  name="college_name" id="editcollege_name" placeholder="">
 
 											 </div>
 									</div>
