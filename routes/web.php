@@ -70,6 +70,7 @@ Route::get('/admission/edustudents', [App\Http\Controllers\AdmissionController::
 Route::get('/admission/assigncollege/{studentid}', [App\Http\Controllers\AdmissionController::class, 'assigncollege'])->name('assigncollege');
 
 Route::get('/getcolleges/{distid}/{edutypeid}/{deptid}', [App\Http\Controllers\AdmissionController::class, 'getcollege'])->name('getcollege');
+Route::get('/getdepartment/{edutypeid}', [App\Http\Controllers\AdmissionController::class, 'getdepartment'])->name('getdepartment');
 
 Route::post('/admission/saveassigncollege', [App\Http\Controllers\AdmissionController::class, 'saveassigncollege'])->name('saveassigncollege');
 Route::get('/admission/viewassigncollege/{studentid}', [App\Http\Controllers\AdmissionController::class, 'viewassigncollege'])->name('viewassigncollege');

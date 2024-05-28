@@ -109,8 +109,12 @@ class AdmissionController extends Controller
     public function department($id)
     {
         $department = DB::table('department')->select('department.*')->Join( 'assigned_department', 'assigned_department.department_id', '=', 'department.id' )->where('assigned_department.institute_id',$id)->orderBy('id', 'Asc')->get();
-
-        $assigndepartment = DB::table('department')->orderBy('id', 'Asc')->get();
+        $college = DB::table('colleges')->where('id',$id)->orderBy('id', 'Asc')->get();
+        $edutype_id = 0;
+        if(count($college) > 0){
+            $edutype_id = $college[0]->edutype_id;
+        }
+        $assigndepartment = DB::table('department')->where('edutype_id',$edutype_id)->orderBy('id', 'Asc')->get();
         $assigndepartment = json_decode( json_encode( $assigndepartment ), true );
             foreach ( $assigndepartment as $key => $s ) {
               $dept_id = $s[ 'id' ];
@@ -289,7 +293,7 @@ class AdmissionController extends Controller
                 ]);
             }
         
-        return redirect()->back()->with('success', 'Success');
+        return redirect('/admission/viewassigncollege/'.$student_id)->with('success', 'Success');
     }
 
     public function getcollege($distid,$edutypeid,$departmentid)
@@ -309,13 +313,20 @@ class AdmissionController extends Controller
         return response()->json( $department );
     }
 
+    public function getdepartment($edutypeid)
+    {
+        $department = DB::table('department')->where('edutype_id',$edutypeid)->get();
+
+        return response()->json( $department );
+    }
+
     public function viewassigncollege($studentid)
     {
         $edustudents = DB::table('students')->select('students.id','students.student_name','edutype.edutype_name','district.district_name','department.department_name','department.id as deptid')
             ->Join( 'assigned_college', 'assigned_college.student_id', '=', 'students.id' ) ->Join( 'edutype', 'edutype.id', '=', 'assigned_college.edutype_id' )
             ->Join( 'department', 'department.id', '=', 'assigned_college.department_id' )
             ->Join( 'district', 'district.id', '=', 'assigned_college.dist_id' )->where('students.id',$studentid)
-            ->orderBy('assigned_college.id', 'Asc')->groupby('students.id')->groupby('students.student_name')->groupby('edutype.edutype_name')->groupby('district.district_name')->groupby('department.department_name')->groupby('department.id')->get();
+            ->orderBy('assigned_college.id', 'Asc')->distinct('department.department_name')->get();
 
         $edustudents = json_decode( json_encode( $edustudents ), true );
         foreach ($edustudents as $key => $s) {
@@ -323,7 +334,7 @@ class AdmissionController extends Controller
              $deptid = $s[ 'deptid' ];
               $colleges = DB::table('colleges')->select('colleges.college_name')
             ->Join( 'assigned_college', 'assigned_college.college_id', '=', 'colleges.id' )->where('assigned_college.department_id',$deptid)
-            ->orderBy('colleges.id', 'Asc')->groupby('colleges.college_name')->get();
+            ->orderBy('colleges.id', 'Asc')->distinct('colleges.college_name')->get();
               $edustudents[ $key ][ 'colleges' ] = $colleges;
         }
         $edustudents = json_decode( json_encode( $edustudents ));

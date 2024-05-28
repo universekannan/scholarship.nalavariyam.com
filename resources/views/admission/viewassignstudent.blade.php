@@ -7,9 +7,6 @@
             <h1>Assigned College List</h1>
          </div>
          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-               <li class="breadcrumb-item"><button type="button" class="btn btn-block btn-primary btn-sm" data-toggle="modal" data-target="#edustudents"><i class="fa fa-plus"> Add </i></button></li>
-            </ol>
          </div>
       </div>
    </div>
@@ -106,9 +103,9 @@
         var obj = JSON.parse(college);
         $("#edustudents").modal("show");
          $.each(obj, function(key, value) {
-                          var key = key + 1;
-                        $("#tabbody").append('<tr><td> '+ key +'</td><td> '+ value.college_name +'</td></tr>');
-                    });  
+            var key = key + 1;
+            $("#tabbody").append('<tr><td> '+ key +'</td><td> '+ value.college_name +'</td></tr>');
+         });  
        }
 
 </script>

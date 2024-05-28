@@ -129,12 +129,14 @@
                   <p>Result</p>
                </a>
             </li>
+            @endif
             <li class="nav-item has-treeview {{ request()->segment(1) == 'examcompleted' ? 'menu-open' : '' }}">
                <a href="{{ route('examcompleted') }}" class="nav-link">
                   <i class="nav-icon fas fa-graduation-cap"></i>
-                  <p>Exaam Completed</p>
+                  <p>Exam Completed</p>
                </a>
             </li>
+            @if(Auth::user()->user_type_id == 1)
             <li class="nav-item">
                <a href="{{ route('category') }}" class="nav-link">
                   <i class="nav-icon fa fa-list-alt"></i>
