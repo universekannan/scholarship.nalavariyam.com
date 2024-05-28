@@ -119,7 +119,7 @@ class DashboardController extends Controller
 		if(Auth::user()->id ==1){
     	$EduStudents = DB::table('students')->whereIn('section_id', array(12, 13, 14, 15, 16, 18))->orderBy('id', 'Asc')->count();
 		} else {
-        $EduStudents = DB::table('students')->whereIn('section_id', array(12, 13, 14, 15, 16, 18))->whereIn('user_id', $login)->orderBy('id', 'Asc')->count();
+        $EduStudents = DB::table('students')->whereIn('section_id', array(12, 13, 14, 15, 16, 18))->where('user_id','$login')->orderBy('id', 'Asc')->count();
         }
       
 

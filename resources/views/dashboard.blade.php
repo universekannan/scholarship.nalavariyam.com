@@ -174,11 +174,12 @@
                            class="fas fa-arrow-circle-right"></i></a>
                        </div>
                    </div>
+
  <div class="col-lg-3 col-6">
                    <div class="small-box bg-orange">
                        <div class="inner">
                            <h3>{{ $EduStudents }}</h3>
-                           <p>Edu Students</p>
+                           <p>Admission</p>
                        </div>
                        <div class="icon">
                            <i class="ion ion-stats-bars"></i>
