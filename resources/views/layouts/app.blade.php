@@ -215,6 +215,16 @@
                 //"responsive": true,
             });
 
+            $('#example7').DataTable({
+                "bPaginate": false,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": false,
+                "autoWidth": false,
+                //"responsive": true,
+            });
+
             $(".alert-success").fadeTo(2000, 500).slideUp(500, function() {
                 $(".alert-success").slideUp(1000);
             });
