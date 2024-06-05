@@ -7,6 +7,9 @@
             <h1>Admission Students List</h1>
          </div>
          <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+		  <a type="button" href="{{ url('addstudent') }}" class="btn btn-block btn-primary btn-sm"><i class="fa fa-plus"> Add </i></a>
+		  </ol>
          </div>
       </div>
    </div>
