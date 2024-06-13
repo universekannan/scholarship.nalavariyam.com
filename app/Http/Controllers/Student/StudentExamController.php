@@ -430,7 +430,7 @@ class StudentExamController extends Controller
     }
 
     public function rank(){
-        $sql="select time_taken,count(correct) as corr,b.student_id from exam_session a,exam_answer b where a.id=b.exam_session_id and correct=1 group by b.student_id,time_taken having corr > 75 order by count(correct) desc,time_taken";
+        $sql="select time_taken,count(correct) as corr,b.student_id from exam_session a,exam_answer b where a.id=b.exam_session_id and correct=1 group by b.student_id,time_taken having corr >= 75 order by count(correct) desc,time_taken";
         $top = DB::select(DB::raw($sql));
         $top = json_decode(json_encode($top),true);
         foreach ($top as $key => $t) {
