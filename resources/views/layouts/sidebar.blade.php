@@ -129,6 +129,12 @@
                   <p>Result</p>
                </a>
             </li>
+            <li class="nav-item has-treeview {{ request()->segment(1) == 'rank' ? 'menu-open' : '' }}">
+               <a href="{{ route('rank') }}" class="nav-link">
+                  <i class="nav-icon fas fa-graduation-cap"></i>
+                  <p>Rank</p>
+               </a>
+            </li>
             @endif
             <li class="nav-item has-treeview {{ request()->segment(1) == 'examcompleted' ? 'menu-open' : '' }}">
                <a href="{{ route('examcompleted') }}" class="nav-link">

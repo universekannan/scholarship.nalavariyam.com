@@ -181,6 +181,8 @@ Route::get('/onlineexam', [App\Http\Controllers\Student\StudentExamController::c
 Route::get('/practiceexam', [App\Http\Controllers\Student\StudentExamController::class, 'practiceexam'])->name('practiceexam');
 Route::get('/distop/{id}', [App\Http\Controllers\Student\StudentExamController::class, 'distop'])->name('distop');
 Route::get('/topper/{id}', [App\Http\Controllers\Student\StudentExamController::class, 'topper'])->name('topper');
+Route::get('/rank', [App\Http\Controllers\Student\StudentExamController::class, 'rank'])->name('rank');
+Route::post('/saveprizeamount', [App\Http\Controllers\Student\StudentExamController::class, 'saveprizeamount'])->name('saveprizeamount');
 Route::get('/result', [App\Http\Controllers\Student\StudentExamController::class, 'result'])->name('result');
 Route::get('/examresult', [App\Http\Controllers\Student\StudentExamController::class, 'examresult'])->name('examresult');
 Route::get('/practiceresult', [App\Http\Controllers\Student\StudentExamController::class, 'practiceresult'])->name('practiceresult');

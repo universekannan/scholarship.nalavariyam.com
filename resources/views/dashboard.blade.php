@@ -66,6 +66,7 @@
                        class="fas fa-arrow-circle-right"></i></a>
                    </div>
                </div>
+              
                 @if (Auth::user()->user_type_id == 1)
                <div class="col-lg-3 col-6">
 

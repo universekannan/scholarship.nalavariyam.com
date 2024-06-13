@@ -225,6 +225,17 @@
                 //"responsive": true,
             });
 
+            $('#example8').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+                //"responsive": true,
+            });
+
+
             $(".alert-success").fadeTo(2000, 500).slideUp(500, function() {
                 $(".alert-success").slideUp(1000);
             });

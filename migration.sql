@@ -80,3 +80,11 @@ CREATE TABLE `assigned_college` (
 ) ENGINE=InnoDB;
 
 ALTER TABLE `assigned_college` ADD `department_id` INT(10) DEFAULT 0 AFTER `edutype_id`;
+
+
+CREATE TABLE `prize_amount` (
+  `id`  int NOT NULL AUTO_INCREMENT,
+  `student_id` int DEFAULT 0,
+  `amount` int DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
