@@ -176,25 +176,42 @@
                        </div>
                    </div>
 
+ <div class="col-lg-3 col-6">
+                   <div class="small-box bg-orange">
+                       <div class="inner">
+                           <h3>{{ $EduStudents }}</h3>
+                           <p>Admission</p>
+                       </div>
+                       <div class="icon">
+                           <i class="ion ion-stats-bars"></i>
+                       </div>
+                       <a href="{{ url('admission/edustudents') }}" class="small-box-footer">More info <i
+                           class="fas fa-arrow-circle-right"></i></a>
+                       </div>
+                   </div>
 
+  <div class="col-lg-3 col-6">
+  </div>
 
                    @if (Auth::user()->user_type_id == 1)
 					   
                    @foreach ($questions as $key => $question)
-                   <div class="col-lg-3 col-6">
-                       <div class="small-box {{$question["color"]}}">
-                           <div class="inner">
-                               <h3>{{$question["qcount"]}}</h3>
-                               <p>{{$question["section_name"]}}</p>
-                           </div>
-                           <div class="icon">
-                               <i class="ion ion-stats-bars"></i>
-                           </div>
-                           <a href="{{ url('question') }}/{{$question['section_id']}}" class="small-box-footer">More info <i
-                               class="fas fa-arrow-circle-right"></i></a>
-                           </div>
-                       </div>
+				   <div class="col-12 col-sm-6 col-md-3">
+					<div class="info-box">
+					<span class="info-box-icon bg-indigo elevation-1"><i class="fas fa-thumbs-up"></i></span>
+					<div class="info-box-content">
+					<span class="info-box-text">{{$question["section_name"]}}</span>
+					<span class="info-box-number">
+					{{$question["qcount"]}}
+					<small><a href="{{ url('question') }}/{{$question['section_id']}}" class="small-box-footer float-sm-right"><i class="fas fa-arrow-circle-right"></i></a>
+					</small>
+					</span>
+					</div>
+					</div>
+					</div>
+
                        @endforeach
+					   
                        @endif
 
                        </div>

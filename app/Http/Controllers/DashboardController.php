@@ -114,8 +114,16 @@ class DashboardController extends Controller
         if ( count( $result ) > 0 ) {
             $RequestAmount = $result[ 0 ]->RequestAmount;
         }
+        $EduStudents = '0';
+		
+		if(Auth::user()->id ==1){
+    	$EduStudents = DB::table('students')->whereIn('section_id', array(12, 13, 14, 15, 16, 18))->orderBy('id', 'Asc')->count();
+		} else {
+        $EduStudents = DB::table('students')->whereIn('section_id', array(12, 13, 14, 15, 16, 18))->where('user_id','$login')->orderBy('id', 'Asc')->count();
+        }
+      
 
-        return view( 'dashboard', compact( 'studentscount', 'admincount','questions','tailoringpending','tailoringcompleted','tailoringresubmit','tailoringnew','RequestAmount' ) );
+        return view( 'dashboard', compact( 'studentscount', 'admincount','questions','tailoringpending','tailoringcompleted','tailoringresubmit','tailoringnew','RequestAmount','EduStudents' ) );
         }
 
         public function payments($from,$to) {

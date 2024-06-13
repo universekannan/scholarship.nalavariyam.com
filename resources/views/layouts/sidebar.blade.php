@@ -105,6 +105,7 @@
             </li>
             @endif
             @if(Auth::user()->user_type_id == 1)
+				
             <li class="nav-item has-treeview {{ request()->segment(1) == 'questions' ? 'menu-open' : '' }}">
                <a href="{{ route('questions') }}" class="nav-link">
                   <i class="nav-icon fas fa-users"></i>
@@ -176,11 +177,12 @@
                </a>
             </li>
             @endif
+            @if(Auth::user()->user_type_id == 1)
              <li class="nav-item has-treeview {{ request()->segment(1) == 'admission' || request()->segment(2) == 'edu_type' || request()->segment(2) == 'edustudents' || request()->segment(2) == 'colleges' || request()->is('addstudent') || request()->is('studentapproval') ? 'menu-open' : '' }}">
                <a href="#" class="nav-link">
                   <i class="nav-icon fa fa-graduation-cap"></i>
                   <p>
-                     Edu Admission
+                      Admission
                      <i class="right fas fa-angle-left"></i>
                   </p>
                </a>
@@ -210,6 +212,15 @@
 
                </ul>
             </li>
+			@elseif(Auth::user()->user_type_id == 2)
+            <li class="nav-item has-treeview {{ request()->segment(2) == 'edustudents' ? 'menu-open' : '' }}">
+               <a href="{{ url('admission/edustudents') }}" class="nav-link">
+                  <i class="nav-icon fas fa-list"></i>
+                  <p>Admission</p>
+               </a>
+            </li>			
+            @endif
+			
             <li class="nav-item has-treeview {{ request()->segment(1) == 'tailoring' ? 'menu-open' : '' }}">
                <a href="{{ url('tailoring') }}/all" class="nav-link">
                   <i class="nav-icon fas fa-list"></i>

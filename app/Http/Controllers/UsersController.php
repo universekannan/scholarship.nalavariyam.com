@@ -18,7 +18,7 @@ class UsersController extends Controller
     {
         $user_id = Auth::user()->id;
         if(Auth::user()->user_type_id == 1) {
-			  
+
             $students = DB::table( 'students' )->select( 'students.*', 'district.district_name', 'medium.medium_name', 'section.section_name' )
             ->Join( 'district', 'district.id', '=', 'students.dist_id' )
             ->Join( 'medium', 'medium.id', '=', 'students.medium_id' )

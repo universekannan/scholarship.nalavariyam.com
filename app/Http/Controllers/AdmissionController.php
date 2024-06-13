@@ -245,7 +245,12 @@ class AdmissionController extends Controller
 	   
 	public function edustudents()
     {
+		$login = Auth::user()->id;
+		if(Auth::user()->id ==1){
     	$edustudents = DB::table('students')->whereIn('section_id', array(12, 13, 14, 15, 16, 18))->orderBy('id', 'Asc')->get();
+		} else {
+        $edustudents = DB::table('students')->whereIn('section_id', array(12, 13, 14, 15, 16, 18))->where('user_id', $login)->orderBy('id', 'Asc')->get();
+        }
         $edustudents = json_decode( json_encode( $edustudents ), true );
         foreach ($edustudents as $key => $s) {
              $studentid = $s[ 'id' ];
