@@ -418,6 +418,8 @@ class StudentExamController extends Controller
     }
 
     public function saveprizeamount(Request $request){
+        $sql="delete from prize_amount";
+        DB::delete($sql);
         foreach($request->prize_amount as $key => $amount){
             $amount=trim($amount);
             $student_id = $request->student_id[$key];
