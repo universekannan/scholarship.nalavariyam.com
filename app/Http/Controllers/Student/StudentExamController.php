@@ -444,7 +444,7 @@ class StudentExamController extends Controller
                 $exam_session_id = $result[0]->id;
                 $top[$key]["exam_session_id"] = $exam_session_id;
                 $top[$key]["start_time"] = $result[0]->start_time;
-                $top[$key]["end_time"] = $result[0]->start_time;
+                $top[$key]["end_time"] = $result[0]->end_time;
             }
 
             $total_ques=0;
@@ -471,18 +471,18 @@ class StudentExamController extends Controller
                 $top[$key]["total_ques"] = $total_ques;
                 $top[$key]["answered_ques"] = $answered_ques;
                 $top[$key]["wrong_answer"] = $wrong_answer;
-                $top[$key]["end_time"] = $result[0]->answer_time;
+                //$top[$key]["end_time"] = $result[0]->answer_time;
                 $start_time = $top[$key]["start_time"];
                 $end_time = $top[$key]["end_time"];
                 $start_datetime = new DateTime($start_time); 
                 $diff = $start_datetime->diff(new DateTime($end_time)); 
                 $total_seconds = ($diff->h)*60*60 + ($diff->i)*60 + $diff->s; 
                 $top[$key]["total_seconds"] = $total_seconds;
-                $mins_seconds = ($diff->h)*60*60 + ($diff->i);
-                if($mins_seconds >= 60){
-                    $mins_seconds = "60 mins"; 
+                $mins_seconds = ($diff->h)*60*60 + ($diff->i)*60;
+                if($mins_seconds >= 3600){
+                    $mins_seconds = 60*60; 
                 }else{
-                    $mins_seconds = $mins_seconds ." mins ". $diff->s. " secs"; 
+                    $mins_seconds = $mins_seconds + $diff->s; 
                 }
                 $top[$key]["mins_seconds"] = $mins_seconds;
             }

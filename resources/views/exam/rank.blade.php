@@ -19,7 +19,7 @@
                         @endif
                         <form action="{{ url('/saveprizeamount') }}" method="post">
                         {{ csrf_field() }}
-                        <table id="example8" class="table table-bordered">
+                        <table id="example3" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>S.No</th>
