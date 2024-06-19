@@ -33,9 +33,12 @@
                  @foreach($top as $key => $e)
                     <tr> 
                     <td>{{ ucwords($e->student_name) }}</td>
-                    <td>
-                        <input type="hidden" value="{{ $e->student_id }}" name="student_id[]" /><input value="{{ $e->prize_amount }}" type="text" maxlength="5" class="form-control number" name="prize_amount[]" />
-                    </td>
+                    <td><input type="hidden" value="{{ $e->student_id }}" name="student_id[]" />
+                        @if(Auth::user()->user_type_id==1)
+                        <input value="{{ $e->prize_amount }}" type="text" maxlength="5" class="form-control number" name="prize_amount[]" />
+                        @else
+                        {{ $e->prize_amount }}
+                        @endif</td>
                     <td>{{ ucwords($e->username) }}</td>
                     <td>{{ round($e->corr/100,2)*100 }} %</td>
                     <td>{{ $e->mins_seconds }}</td>
@@ -43,11 +46,13 @@
                  @endforeach
                             </tbody>
                             </table>
+                            @if(Auth::user()->user_type_id==1)
                             <div class="row">
                             <div class="col-md-12 text-center">
                                 <input type="submit" value="Save Prize Amount" class="btn btn-success text-center" >
                             </div>
                             </div>
+                            @endif
                         </form>
 
                         <div class="modal fade" id="addcategory">
