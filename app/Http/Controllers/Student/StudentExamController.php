@@ -431,6 +431,69 @@ class StudentExamController extends Controller
         return redirect('/rank');
     }
 
+    public function examrank(){
+        $sql="select time_taken,count(correct) as corr,b.student_id from exam_session a,exam_answer b where a.id=b.exam_session_id and correct=1 group by b.student_id,time_taken having corr >= 95 order by count(correct) desc,time_taken asc";
+        $top = DB::select(DB::raw($sql));
+        $top = json_decode(json_encode($top),true);
+        foreach ($top as $key => $t) {
+            $student_id = $t["student_id"];
+            $sql = "select * from exam_session where student_id = $student_id";
+            $result = DB::select(DB::raw($sql));
+            $exam_session_id=0;
+            if(count($result) > 0){
+                $exam_session_id = $result[0]->id;
+                $top[$key]["student_id"] = $student_id;
+                $top[$key]["exam_session_id"] = $exam_session_id;
+                $top[$key]["start_time"] = $result[0]->start_time;
+                $top[$key]["end_time"] = $result[0]->end_time;
+                $start_time = $top[$key]["start_time"];
+                $end_time = $top[$key]["end_time"];
+                $start_datetime = new DateTime($start_time); 
+                $diff = $start_datetime->diff(new DateTime($end_time)); 
+                $total_seconds = ($diff->h)*60*60 + ($diff->i)*60 + $diff->s; 
+                $top[$key]["total_seconds"] = $total_seconds;
+                $mins_seconds = ($diff->h)*60*60 + ($diff->i)*60;
+                if($mins_seconds >= 3600){
+                    $mins_seconds = 60*60; 
+                }else{
+                    $mins_seconds = $mins_seconds + $diff->s; 
+                }
+                $top[$key]["mins_seconds"] = $mins_seconds;
+            }
+            $sql = "select student_name,username from students where id = $student_id";
+            $result = DB::select(DB::raw($sql));
+            if(count($result) > 0){
+                $top[$key]["student_name"] = $result[0]->student_name;
+                $top[$key]["username"] = $result[0]->username;
+            }
+            $top[$key]["prize_amount"]="";
+            $sql = "select * from prize_amount where student_id = $student_id";
+            $result = DB::select(DB::raw($sql));
+            if(count($result) > 0){
+                $top[$key]["prize_amount"] = $result[0]->amount;
+            }
+        }
+        $top = json_decode(json_encode($top));
+        return view( 'student/examrank',compact('top'));
+    }
+
+    public function certificate(){
+        $sql="select time_taken,count(correct) as corr,b.student_id from exam_session a,exam_answer b where a.id=b.exam_session_id and correct=1 group by b.student_id,time_taken having corr >= 75 order by count(correct) desc,time_taken asc";
+        $top = DB::select(DB::raw($sql));
+        $top = json_decode(json_encode($top),true);
+        foreach ($top as $key => $t) {
+            $student_id = $t["student_id"];
+            $sql = "select student_name,username from students where id = $student_id";
+            $result = DB::select(DB::raw($sql));
+            if(count($result) > 0){
+                $top[$key]["student_name"] = $result[0]->student_name;
+                $top[$key]["username"] = $result[0]->username;
+            }
+        }
+        $top = json_decode(json_encode($top));
+        return view( 'exam/certificate',compact('top'));
+    }
+
     public function rank(){
         $sql="select time_taken,count(correct) as corr,b.student_id from exam_session a,exam_answer b where a.id=b.exam_session_id and correct=1 group by b.student_id,time_taken having corr >= 95 order by count(correct) desc,time_taken asc";
         $top = DB::select(DB::raw($sql));
@@ -442,12 +505,26 @@ class StudentExamController extends Controller
             $exam_session_id=0;
             if(count($result) > 0){
                 $exam_session_id = $result[0]->id;
+                $top[$key]["student_id"] = $student_id;
                 $top[$key]["exam_session_id"] = $exam_session_id;
                 $top[$key]["start_time"] = $result[0]->start_time;
                 $top[$key]["end_time"] = $result[0]->end_time;
+                $start_time = $top[$key]["start_time"];
+                $end_time = $top[$key]["end_time"];
+                $start_datetime = new DateTime($start_time); 
+                $diff = $start_datetime->diff(new DateTime($end_time)); 
+                $total_seconds = ($diff->h)*60*60 + ($diff->i)*60 + $diff->s; 
+                $top[$key]["total_seconds"] = $total_seconds;
+                $mins_seconds = ($diff->h)*60*60 + ($diff->i)*60;
+                if($mins_seconds >= 3600){
+                    $mins_seconds = 60*60; 
+                }else{
+                    $mins_seconds = $mins_seconds + $diff->s; 
+                }
+                $top[$key]["mins_seconds"] = $mins_seconds;
             }
 
-            $total_ques=0;
+            /*$total_ques=0;
             $answered_ques=0;
             $wrong_answer=0;
             $sql = "select count(*) as total_ques from exam_answer where student_id = $student_id";
@@ -485,14 +562,13 @@ class StudentExamController extends Controller
                     $mins_seconds = $mins_seconds + $diff->s; 
                 }
                 $top[$key]["mins_seconds"] = $mins_seconds;
-            }
+            }*/
 
-            $sql = "select * from students where id = $student_id";
+            $sql = "select student_name,username from students where id = $student_id";
             $result = DB::select(DB::raw($sql));
             if(count($result) > 0){
-                $top[$key]["student_id"] = $student_id;
                 $top[$key]["student_name"] = $result[0]->student_name;
-                $top[$key]["adhaar_number"] = $result[0]->adhaar_number;
+                $top[$key]["username"] = $result[0]->username;
             }
             $top[$key]["prize_amount"]="";
             $sql = "select * from prize_amount where student_id = $student_id";

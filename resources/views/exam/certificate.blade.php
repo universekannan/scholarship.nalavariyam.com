@@ -7,7 +7,7 @@
                 </div>
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Prize Winners</h3>
+                        <h3 class="card-title">Certificate</h3>
                     </div>
                     <div class="card-body">
                         @if (session()->has('success'))
@@ -22,23 +22,19 @@
                         <table id="example13" class="table table-bordered">
                             <thead>
                                 <tr>
+                                    <th>S.No</th>
                                     <th>Student Name</th>
-                                    <th>Prize Money</th>
                                     <th>Username</th>
                                     <th>Percentage</th>
-                                    <th>Time Taken</th>
                                 </tr>
                             </thead>
                             <tbody>
                  @foreach($top as $key => $e)
                     <tr> 
+                    <td>{{ $key+1 }}</td>
                     <td>{{ ucwords($e->student_name) }}</td>
-                    <td>
-                        <input type="hidden" value="{{ $e->student_id }}" name="student_id[]" /><input value="{{ $e->prize_amount }}" type="text" maxlength="5" class="form-control number" name="prize_amount[]" />
-                    </td>
                     <td>{{ ucwords($e->username) }}</td>
                     <td>{{ round($e->corr/100,2)*100 }} %</td>
-                    <td>{{ $e->mins_seconds }}</td>
                     </tr>
                  @endforeach
                             </tbody>

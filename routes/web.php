@@ -182,9 +182,11 @@ Route::get('/practiceexam', [App\Http\Controllers\Student\StudentExamController:
 Route::get('/distop/{id}', [App\Http\Controllers\Student\StudentExamController::class, 'distop'])->name('distop');
 Route::get('/topper/{id}', [App\Http\Controllers\Student\StudentExamController::class, 'topper'])->name('topper');
 Route::get('/rank', [App\Http\Controllers\Student\StudentExamController::class, 'rank'])->name('rank');
+Route::get('/certificate', [App\Http\Controllers\Student\StudentExamController::class, 'certificate'])->name('certificate');
 Route::post('/saveprizeamount', [App\Http\Controllers\Student\StudentExamController::class, 'saveprizeamount'])->name('saveprizeamount');
 Route::get('/result', [App\Http\Controllers\Student\StudentExamController::class, 'result'])->name('result');
 Route::get('/examresult', [App\Http\Controllers\Student\StudentExamController::class, 'examresult'])->name('examresult');
+Route::get('/examrank', [App\Http\Controllers\Student\StudentExamController::class, 'examrank'])->name('examrank');
 Route::get('/practiceresult', [App\Http\Controllers\Student\StudentExamController::class, 'practiceresult'])->name('practiceresult');
 Route::get('/allpracticeresult', [App\Http\Controllers\Student\StudentExamController::class, 'allpracticeresult'])->name('allpracticeresult');
 ROUTE::get('/saveanswer/{ques}/{ans}/{sid}', [App\Http\Controllers\Student\StudentExamController::class, 'saveanswer'])->name('saveanswer');

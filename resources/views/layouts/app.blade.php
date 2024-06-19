@@ -201,8 +201,17 @@
                 "searching": true,
                 "ordering": true,
                 "info": true,
+                "autoWidth": false
+            });
+
+            $('#example13').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
                 "autoWidth": false,
-                //"responsive": true,
+                order: [[3, 'desc'], [4, 'asc']]
             });
 
             $('#example6').DataTable({

@@ -135,6 +135,16 @@ $(function () {
     //"responsive": true,
   });
 
+  $('#example13').DataTable({
+    "paging": false,
+    "lengthChange": false,
+    "searching": true,
+    "ordering": true,
+    "info": true,
+    "autoWidth": false,
+    order: [[3, 'desc'], [4, 'asc']]
+  });
+
   $('#example3').DataTable({
     "paging": false,
     "lengthChange": false,
