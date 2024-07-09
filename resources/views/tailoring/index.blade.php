@@ -633,7 +633,7 @@ function approve(id,name,address1,address2,district,taluk,profileimage,address,u
    $("#tailoringcustomerid").val(id);
    $("#tailoringuserid").val(userid);
    $("#apprname").text(name);
-   $("#apprcoursename").text(coursename);
+   $("#apprcoursename").text(course_name);
    $("#appraddress1").text(address1 + " " + address2);
    $("#apprdist").text(district);
    $("#apprtaluk").text(taluk);
