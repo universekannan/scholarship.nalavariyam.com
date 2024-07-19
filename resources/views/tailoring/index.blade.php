@@ -94,7 +94,7 @@
        @endif
        @elseif($tailoringlist->payment_status == "Rejected")
        @if(Auth::user()->id != 42)
-       <a onclick="resubmit('{{ $tailoringlist->id }}','{{ $tailoringlist->name }}','{{ $tailoringlist->address_1 }}','{{ $tailoringlist->address_2 }}','{{ $tailoringlist->district }}','{{ $tailoringlist->taluk }}','{{ $tailoringlist->profile_image }}','{{ $tailoringlist->payment_status }}','{{ $tailoringlist->reason }}','{{ $tailoringlist->significant }}','{{ $tailoringlist->father_or_hus_name }}','{{ $tailoringlist->course_name }}')" type="button" class="btn btn-info btn-sm">Resubmit</a>
+       <a onclick="resubmit('{{ $tailoringlist->id }}','{{ $tailoringlist->name }}','{{ $tailoringlist->address_1 }}','{{ $tailoringlist->address_2 }}','{{ $tailoringlist->district }}','{{ $tailoringlist->taluk }}','{{ $tailoringlist->profile_image }}','{{ $address1 }}','{{ $tailoringlist->payment_status }}','{{ $tailoringlist->reason }}','{{ $tailoringlist->significant }}','{{ $tailoringlist->father_or_hus_name }}','{{ $tailoringlist->course_name }}')" type="button" class="btn btn-info btn-sm">Resubmit</a>
        @endif
        @elseif($tailoringlist->payment_status == "Completed")
        <input type="button" value="Approved" class="btn btn-success btn-sm">

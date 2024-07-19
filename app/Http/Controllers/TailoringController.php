@@ -183,7 +183,6 @@ class TailoringController extends Controller
 	{
 		$payment_status = $request->payment_status;
 		$customerid = $request->customerid;
-        echo $customerid;die;
 		if($payment_status == "Rejected"){
     		DB::table('tailoring')->where('id', $customerid)->update([
     			'payment_status' => $payment_status,
