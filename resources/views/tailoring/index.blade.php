@@ -68,12 +68,12 @@
       <td> {{ $tailoringlist->user_id }}</td>
       @endif
       <td>
-          @php 
+          @php
        $address1 = $tailoringlist->address;
        $address1 = str_replace(PHP_EOL, ' ',$address1);
        $address1 = str_replace("\r\n", ' ', $address1);
        $address1 = str_replace("\n", ' ', $address1);
-       $NEWLINE_RE = '/(\r\n)|\r|\n/'; 
+       $NEWLINE_RE = '/(\r\n)|\r|\n/';
        $address1 = preg_replace($NEWLINE_RE,' ', $address1);
        @endphp
 
@@ -87,10 +87,10 @@
        @endif
        @elseif($tailoringlist->payment_status == "Pending")
        @if(Auth::user()->user_type_id == 1 || Auth::user()->id == 42)
-     
+
        <a onclick="approve('{{ $tailoringlist->id }}','{{ $tailoringlist->name }}','{{ $tailoringlist->address_1 }}','{{ $tailoringlist->address_2 }}','{{ $tailoringlist->district }}','{{ $tailoringlist->taluk }}','{{ $tailoringlist->profile_image }}','{{ $address1 }}','{{ $tailoringlist->user_id }}','{{ $tailoringlist->payment_status }}','{{ $tailoringlist->significant }}','{{ $tailoringlist->father_or_hus_name }}','{{ $tailoringlist->institute }}','{{ $tailoringlist->institutename }}','{{ $tailoringlist->institutelocation }}','{{ $tailoringlist->course_name }}','{{ $tailoringlist->signature }}')" type="button" class="btn btn-info btn-sm">Approve</a>
        @else
-       <input type="button" value="Waiting for Approval" class="btn btn-primary btn-sm">  
+       <input type="button" value="Waiting for Approval" class="btn btn-primary btn-sm">
        @endif
        @elseif($tailoringlist->payment_status == "Rejected")
        @if(Auth::user()->id != 42)
@@ -101,8 +101,8 @@
        <a onclick="viewuser('{{ $tailoringlist->name }}','{{ $tailoringlist->address_1 }}','{{ $tailoringlist->address_2 }}','{{ $tailoringlist->district }}','{{ $tailoringlist->taluk }}','{{ $tailoringlist->profile_image }}','{{ $tailoringlist->significant }}','{{ $tailoringlist->father_or_hus_name }}','{{ $tailoringlist->course_name }}','{{ $address1 }}')" type="button" class="btn btn-info btn-sm">View</a>
        @endif
 
-   </td>   
-</td>   
+   </td>
+</td>
 </tr>
 @endforeach
 
@@ -164,7 +164,7 @@
                                   <label for="password">Significant</label>
                                   <select required="required" class="form-control" name="significant" id="significant" style="width:100%;">
                                      <option value="">
-                                        Select 
+                                        Select
                                     </option>
                                     <option value="S/O">S/O</option>
                                     <option value="D/O">D/O</option>
@@ -188,13 +188,13 @@
                    <div class="form-group">
                        <label>Taluk</label>
                        <input maxlength="50" required type="text" class="form-control" name="taluk" id="taluk"
-                       placeholder="Enter Taluk">                                   
+                       placeholder="Enter Taluk">
                    </div>
                    <div class="form-group">
                                   <label for="password">Course Name</label>
                                   <select required="required" class="form-control" name="course_name" id="course_name" style="width:100%;">
                                      <option value="">
-                                        Select 
+                                        Select
                                     </option>
                                     <option value="Tailoring Course">Tailoring Course</option>
                                     <option value="Tailoring and Embroidering Course">Tailoring and Embroidering Course</option>
@@ -371,12 +371,12 @@
               id="fatherorhusname"></span> </label>
           </div>
           <div class="form-group row">
-           <label for="" class="col-sm-4 col-form-label"><span style="color:red"></span>Address 
+           <label for="" class="col-sm-4 col-form-label"><span style="color:red"></span>Address
            </label>
            <label for="" class="col-sm-8 col-form-label"><span style="color:red"
               id="appraddress1"></span> </label>
           </div>
-    
+
           <div class="form-group row">
            <label for="" class="col-sm-4 col-form-label"><span style="color:red"></span>District
            </label>
@@ -723,7 +723,7 @@ function resubmit(id,name,address1,address2,district,taluk,profileimage,status,r
 
       $("#resstatus").attr("readonly", true);
       $("#resreason").attr("readonly", true);
-  } 
+  }
 
 }
 

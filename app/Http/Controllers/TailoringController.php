@@ -53,18 +53,18 @@ class TailoringController extends Controller
     	$tailoring = DB::select($sql);
 		$tailoring = json_decode( json_encode( $tailoring ), true );
         $data = array();
-        foreach ( $tailoring as $key => $ser ) { 
+        foreach ( $tailoring as $key => $ser ) {
             $userid = $ser[ 'user_id' ];
-            
+
             $sql = "SELECT username,tailoring_user,tailoring_ins_name,tailoring_ins_location,tailoring_ins_signature FROM users where id='$userid'";
             $result = DB::select($sql);
             if(count($result) > 0){
-                $tailoring[ $key ][ 'username' ] = $result[0]->username;   
-                $tailoring[ $key ][ 'institute' ] = $result[0]->tailoring_user;   
-                $tailoring[ $key ][ 'institutename' ] = $result[0]->tailoring_ins_name;   
-                $tailoring[ $key ][ 'institutelocation' ] = $result[0]->tailoring_ins_location; 
-                $tailoring[ $key ][ 'signature' ] = $result[0]->tailoring_ins_signature; 
-                 $tailoring[ $key ][ 'address' ] = ""; 
+                $tailoring[ $key ][ 'username' ] = $result[0]->username;
+                $tailoring[ $key ][ 'institute' ] = $result[0]->tailoring_user;
+                $tailoring[ $key ][ 'institutename' ] = $result[0]->tailoring_ins_name;
+                $tailoring[ $key ][ 'institutelocation' ] = $result[0]->tailoring_ins_location;
+                $tailoring[ $key ][ 'signature' ] = $result[0]->tailoring_ins_signature;
+                 $tailoring[ $key ][ 'address' ] = "";
             }
 
         }
@@ -74,7 +74,7 @@ class TailoringController extends Controller
             $data=array();
             $data['key']=$API_KEY;
             $data['tailoring'] =  $tailoring;
-           
+
 
             $ch = curl_init();
             $headers = array();
@@ -94,14 +94,14 @@ class TailoringController extends Controller
                 $msg = 'Error calling wallet';
             }
             curl_close($ch);
-           
+
             $tailoring = json_decode( json_encode( $tailoring ) );
 
             //echo "<pre>";print_r($tailoring);echo"</pre>";die;
 
     	   return view('tailoring/index',compact('tailoring'));
     }
-	
+
 	public function addtailoring(Request $request)
 	{
 		DB::table('tailoring')->insert([
@@ -173,7 +173,7 @@ class TailoringController extends Controller
             DB::insert(DB::raw($sql));
             $date = date("Y-m-d");
 	  		$sql = "update tailoring set payment_status = 'Pending',date = '$date' where id = $customerid";
-	        DB::update( DB::raw( $sql )); 
+	        DB::update( DB::raw( $sql ));
         return redirect( 'tailoring/pending' )->with('success','Payment Successful ..');
 
     	}
@@ -229,13 +229,13 @@ class TailoringController extends Controller
                 $sql = "insert into payment (log_id,from_id,to_id,amount,ad_info,service_status,time,paydate,iscommission,service_entity) values ('$superadmin_id','$referral_id','$superadmin_id','$amount','$ad_info', '$service_status','$time','$paydate',1,'scholarship')";
                 DB::insert(DB::raw($sql));
     	  		$sql = "update tailoring set payment_status = 'Completed' where id = $customerid";
-    	        DB::update( DB::raw( $sql )); 
-            return redirect( 'tailoring/completed' )->with('success','Payment Successful ..');   
+    	        DB::update( DB::raw( $sql ));
+            return redirect( 'tailoring/completed' )->with('success','Payment Successful ..');
     	   }
 		}
-		
+
 		return redirect()->back()->with('Success','Update Successfully....!');
-		
+
 	}
 
 	public function resubmit_certificate(Request $request)
@@ -260,7 +260,7 @@ class TailoringController extends Controller
             'profile_image' => $profile_image,
         ] );
         }
-     
+
 
 		return redirect()->back()->with('Success','Add Successfully....!');
 	}
@@ -271,5 +271,5 @@ class TailoringController extends Controller
         ->Join( 'district', 'district.id', '=', 'users.dist_id' )->where('tailoring_user',1)->orderBy( 'id', 'Asc' )->get();
      return view('tailoring/tailoringinstitute',compact('manageinstitute'));
     }
-	
-} 
+
+}
