@@ -187,6 +187,7 @@ Route::post('/saveprizeamount', [App\Http\Controllers\Student\StudentExamControl
 Route::get('/result', [App\Http\Controllers\Student\StudentExamController::class, 'result'])->name('result');
 Route::get('/examresult', [App\Http\Controllers\Student\StudentExamController::class, 'examresult'])->name('examresult');
 Route::get('/examrank', [App\Http\Controllers\Student\StudentExamController::class, 'examrank'])->name('examrank');
+Route::get('/examcert', [App\Http\Controllers\Student\StudentExamController::class, 'examcert'])->name('examcert');
 Route::get('/practiceresult', [App\Http\Controllers\Student\StudentExamController::class, 'practiceresult'])->name('practiceresult');
 Route::get('/allpracticeresult', [App\Http\Controllers\Student\StudentExamController::class, 'allpracticeresult'])->name('allpracticeresult');
 ROUTE::get('/saveanswer/{ques}/{ans}/{sid}', [App\Http\Controllers\Student\StudentExamController::class, 'saveanswer'])->name('saveanswer');

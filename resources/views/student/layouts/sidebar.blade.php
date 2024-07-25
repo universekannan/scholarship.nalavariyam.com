@@ -72,6 +72,13 @@
                         <p>Exam Rank</p>
                     </a>
                 </li>
+                <li class="nav-item has-treeview {{ request()->segment(1) == 'examcert' ? 'menu-open' : '' }}">
+                    <a href="{{ route('examcert') }}" class="nav-link">
+                        <i class=""></i>
+                        <i class="nav-icon fa fa-award"></i>
+                        <p>Certificate</p>
+                    </a>
+                </li>
                 @endif
                 <li
                     class="nav-item has-treeview {{ request()->segment(1) == 'profile' || request()->is('changepassword') ? 'menu-open' : '' }}">

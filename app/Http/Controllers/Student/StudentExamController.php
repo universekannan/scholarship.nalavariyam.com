@@ -418,17 +418,19 @@ class StudentExamController extends Controller
     }
 
     public function saveprizeamount(Request $request){
-        $sql="delete from prize_amount";
-        DB::delete($sql);
-        foreach($request->prize_amount as $key => $amount){
-            $amount=trim($amount);
-            $student_id = $request->student_id[$key];
-            if($amount != ""){
-                $sql="insert into prize_amount (student_id,amount) values ($student_id,$amount)";
-                DB::insert($sql);
+        if(Auth::user()->user_type_id == "1"){
+            $sql="delete from prize_amount";
+            DB::delete($sql);
+            foreach($request->prize_amount as $key => $amount){
+                $amount=trim($amount);
+                $student_id = $request->student_id[$key];
+                if($amount != ""){
+                    $sql="insert into prize_amount (student_id,amount) values ($student_id,$amount)";
+                    DB::insert($sql);
+                }
             }
         }
-        return redirect('/rank');
+        //return redirect('/rank');
     }
 
     public function examrank(){
@@ -475,6 +477,23 @@ class StudentExamController extends Controller
         }
         $top = json_decode(json_encode($top));
         return view( 'student/examrank',compact('top'));
+    }
+
+    public function examcert(){
+        $sql="select time_taken,count(correct) as corr,b.student_id from exam_session a,exam_answer b where a.id=b.exam_session_id and correct=1 group by b.student_id,time_taken having corr >= 75 order by count(correct) desc,time_taken asc";
+        $top = DB::select(DB::raw($sql));
+        $top = json_decode(json_encode($top),true);
+        foreach ($top as $key => $t) {
+            $student_id = $t["student_id"];
+            $sql = "select student_name,username from students where id = $student_id";
+            $result = DB::select(DB::raw($sql));
+            if(count($result) > 0){
+                $top[$key]["student_name"] = $result[0]->student_name;
+                $top[$key]["username"] = $result[0]->username;
+            }
+        }
+        $top = json_decode(json_encode($top));
+        return view( 'student/examcert',compact('top'));
     }
 
     public function certificate(){
