@@ -430,7 +430,7 @@ class StudentExamController extends Controller
                 }
             }
         }
-        //return redirect('/rank');
+        return redirect('/rank');
     }
 
     public function examrank(){
